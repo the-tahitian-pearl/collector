@@ -1,4 +1,6 @@
 ![alt text](./docs/collector.png)
+[![CodeFactor](https://www.codefactor.io/repository/github/the-tahitian-pearl/collector/badge)](https://www.codefactor.io/repository/github/the-tahitian-pearl/collector)
+
 # About
 
 Extend usage of money in PHP

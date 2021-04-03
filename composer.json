@@ -12,7 +12,8 @@
   ],
   "require": {
     "php": "^8",
-    "moneyphp/money": "^3.3"
+    "moneyphp/money": "^3.3",
+    "globalcitizen/php-iban": "^4.0"
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest",
@@ -23,5 +24,8 @@
       "TheTahitianPearl\\Collector\\": "src",
       "TheTahitianPearl\\Collector\\Test\\": "tests"
     }
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit --group dto"
   }
 }

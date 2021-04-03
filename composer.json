@@ -1,0 +1,27 @@
+{
+  "name": "the-tahitian-pearl/collector",
+  "description": "Extend usage of money in PHP",
+  "version": "0.0.1",
+  "minimum-stability": "stable",
+  "license": "mit",
+  "authors": [
+    {
+      "name": "sudochecksum",
+      "email": "sudochecksum@pm.me"
+    }
+  ],
+  "require": {
+    "php": "^8",
+    "moneyphp/money": "^3.3"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-latest",
+    "phpunit/phpunit": "^9.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "TheTahitianPearl\\Collector\\": "src",
+      "TheTahitianPearl\\Collector\\Test\\": "tests"
+    }
+  }
+}

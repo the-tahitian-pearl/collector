@@ -3,6 +3,8 @@
 /app/logs/*
 !app/cache/.gitkeep
 !app/logs/.gitkeep
+.idea/*
+.phpunit.result.cache
 
 # Email spool folder
 /app/spool/*

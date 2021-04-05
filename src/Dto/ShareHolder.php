@@ -2,20 +2,27 @@
 
 namespace TheTahitianPearl\Collector\Dto;
 
-use LogicException;
-use Money\Money;
-use TheTahitianPearl\Collector\Iterator\MoneyBagIterator;
-use TheTahitianPearl\Collector\Util\CountUtil;
+use TheTahitianPearl\Collector\Dto\Money\Coin;
+use TheTahitianPearl\Collector\Dto\Money\CoinBag;
 
 class ShareHolder
 {
     private string $name;
 
-    private int $shareAmount = -1;
+    private int $shareRatio;
 
-    private int $moneyBagPosition = -1;
+    private CoinBag $coinBag;
 
-    private Money $share;
+    private Coin|null $shareCoin = null;
+
+    public function __construct(string $name, CoinBag $coinBag, int $shareRatio = 0)
+    {
+        $this->name = $name;
+        $this->coinBag = $coinBag;
+        $this->shareRatio = $shareRatio;
+
+        $this->coinBag->addShareHolder($this);
+    }
 
     final public function getName(): string
     {
@@ -29,70 +36,42 @@ class ShareHolder
         return $this;
     }
 
-    final public function getMoneyBagPosition(): int
+    final public function getShareRatio(): int
     {
-        return $this->moneyBagPosition;
+        return $this->shareRatio;
     }
 
-    final public function hasMoneyBagPosition(): bool
+    final public function setShareRatio(int $shareRatio): self
     {
-        return $this->moneyBagPosition !== -1;
-    }
-
-    final public function setMoneyBagPosition(int $moneyBagPosition): self
-    {
-        $this->moneyBagPosition = $moneyBagPosition;
+        $this->shareRatio = $shareRatio;
 
         return $this;
     }
 
-    final public function getShareAmount(): int
+    public function getCoinBag(): CoinBag
     {
-        return $this->shareAmount;
+        return $this->coinBag;
     }
 
-    final public function setShareAmount(int $shareAmount,): self
+    public function setCoinBag(CoinBag $coinBag): self
     {
-        $this->shareAmount = $shareAmount;
+        $this->coinBag = $coinBag;
 
         return $this;
     }
 
-    public function claimShare(): Money
+    final public function previewShare(): ?Coin
     {
-        return $this->share;
+        return $this->shareCoin;
     }
 
-    public function setShare(MoneyBagIterator $moneyBagIterator): ShareHolder
+    final public function claimShare(): ?Coin
     {
-
-        if ($this->getShareAmount() > 100 || $this->getShareAmount() <= 0) {
-            throw new LogicException(
-                'Share amount for stakeholder cannot be over 100 or below/even as 0'
-            );
+        if ($this->shareCoin === null) {
+            return $this->shareCoin;
         }
 
-        if (CountUtil::hasNone($moneyBagIterator->toArray())) {
-            throw new LogicException(
-                'No money bags available for shareholder'
-            );
-        }
-
-        if (!$this->hasMoneyBagPosition()) {
-            throw new LogicException(
-                'Money bag position has not been set for current shareholder'
-            );
-        }
-
-        if (!$moneyBagIterator->validPosition($this->getMoneyBagPosition())) {
-            throw new LogicException(
-                'Money bag does not exists in the iterator'
-            );
-        }
-
-        $moneyBag = $moneyBagIterator->get($this->getMoneyBagPosition());
-        $this->share = $moneyBag->allocate([(string)$this->getShareAmount()])[0];
-
-        return $this;
+        return $this->shareCoin;
     }
+
 }

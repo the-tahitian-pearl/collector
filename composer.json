@@ -12,7 +12,14 @@
   "require": {
     "php": "^8",
     "moneyphp/money": "^3.3",
-    "globalcitizen/php-iban": "^4.0"
+    "globalcitizen/php-iban": "^4.0",
+    "php-http/curl-client": "^2.2",
+    "nyholm/psr7": "^1.4",
+    "php-http/message": "^1.11",
+    "florianv/swap": "^4.3",
+    "brick/money": "^0.5.2",
+    "kwn/number-to-words": "^1.12",
+    "rinvex/countries": "^7.3"
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest",
@@ -25,6 +32,6 @@
     }
   },
   "scripts": {
-    "test": "vendor/bin/phpunit --group dto"
+    "test": "vendor/bin/phpunit --group dto factory"
   }
 }

@@ -2,21 +2,32 @@
 
 namespace TheTahitianPearl\Collector\Util;
 
+use Countable;
+use JetBrains\PhpStorm\Pure;
 
 class CountUtil
 {
-    final public static function hasTotalOf(array $array): int
+    #[Pure]
+    final public static function hasTotalOf(array|Countable $countable): int
     {
-        return count($array);
+        return count($countable);
     }
 
-    final public static function hasOneOrMore(array $array): bool
+    #[Pure]
+    final public static function hasOneOrMore(array|Countable $countable): bool
     {
-        return count($array) >= 1;
+        return count($countable) >= 1;
     }
 
-    final public static function hasNone(array $array): bool
+    #[Pure]
+    final public static function hasOne(array|Countable $countable): bool
     {
-        return count($array) === 0;
+        return count($countable) === 1;
+    }
+
+    #[Pure]
+    final public static function hasNone(array|Countable $countable): bool
+    {
+        return count($countable) === 0;
     }
 }

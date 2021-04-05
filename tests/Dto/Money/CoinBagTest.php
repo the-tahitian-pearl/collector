@@ -20,14 +20,11 @@ final class CoinBagTest extends TestCase
      */
     public function get_first_coin_from_bag(Coin $coinOne, Coin $coinTwo, Coin $cointThree): void
     {
-
         $coinBag = new CoinBag([
             $coinOne,
             $coinTwo,
             $cointThree
         ]);
-
-        var_dump($coinOne->getCoinCirculation());
 
         self::assertEquals(
             $coinOne->flipTails()->getAmount(),

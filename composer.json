@@ -32,6 +32,6 @@
     }
   },
   "scripts": {
-    "test": "vendor/bin/phpunit --group dto factory"
+    "test": "vendor/bin/phpunit --group dto,factory"
   }
 }
